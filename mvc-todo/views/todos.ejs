@@ -6,6 +6,14 @@
     <title>Document</title>
 </head>
 <body>
-    <h1>My Todos</h1>
+    <form action="/todos/createTodos" method="post">
+        <input type="text" placeholder="Add Todo" name="userTodo">
+        <button>Add</button>
+    </form>
+
+    <!--  * Creating li for each todo? -->
+    <% todos.forEach(todoItem => { %>
+        <li><%= todoItem.todo %></li>
+    <% }) %>
 </body>
 </html>
