@@ -10,10 +10,15 @@
         <input type="text" placeholder="Add Todo" name="userTodo">
         <button>Add</button>
     </form>
-
+    
     <!--  * Creating li for each todo? -->
     <% todos.forEach(todoItem => { %>
-        <li><%= todoItem.todo %></li>
+        <li class='todoItem' data-id='<%= todoItem._id %>'>
+            <span><%= todoItem.todo %></span>
+            <button class='del'> Delete </button>
+        </li>
     <% }) %>
+
+    <script src="/js/main.js"></script>
 </body>
 </html>
