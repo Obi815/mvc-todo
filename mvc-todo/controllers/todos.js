@@ -25,4 +25,22 @@ module.exports = {
             console.log(err)
         }
     },
+    markComplete: async(req, res) => {
+        try {
+            const completeTodo = await Todo.findByIdAndUpdate(req.body.todoIdFromJSFile, 
+                { completed: true })
+            res.json('Marked Complete')
+        } catch (err) {
+            console.log(err)
+        }
+    },
+    markIncomplete: async(req, res) => {
+        try {
+            const incompleteTodo = await Todo.findByIdAndUpdate(req.body.todoIdFromJSFile, 
+                { completed: false })
+                res.json('Marked Incomplete')
+        } catch (err) {
+            console.log(err)
+        }
+    },
 }

@@ -14,7 +14,7 @@
     <!--  * Creating li for each todo? -->
     <% todos.forEach(todoItem => { %>
         <li class='todoItem' data-id='<%= todoItem._id %>'>
-            <span><%= todoItem.todo %></span>
+            <span class='<%= todoItem.completed === true ? "completed" : "not" %>'><%= todoItem.todo %></span>
             <button class='del'> Delete </button>
         </li>
     <% }) %>
