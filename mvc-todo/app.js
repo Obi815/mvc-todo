@@ -18,5 +18,4 @@ app.use('/todos', routes)
 
 app.listen(3000, () =>{
     console.log("Server is Running");
-    
 })
