@@ -6,6 +6,7 @@ const mongoose = require('mongoose')
 const routes = require('./routes/todos')
 const passport = require('passport')
 const session = require('express-session')
+const mainRoutes = require('./routes/main')  
 
 app.use(express.static('public'))
 app.use(express.json())
@@ -22,7 +23,7 @@ app.get('/', (req, res) => {
 // Sessions
 app.use(
     session({
-      secret: 'keyboard cat',
+      secret: process.env.SESSION_SECRET,
       resave: false,
       saveUninitialized: false,
     })
@@ -31,6 +32,7 @@ app.use(
 // Passport middleware
 app.use(passport.initialize())
 app.use(passport.session())
+app.use('/', mainRoutes)
 app.use('/todos', routes)
 
 
