@@ -4,7 +4,7 @@ A full-stack todo app with user accounts. People sign up, log in, and manage the
 
 **Link to project:** Not deployed yet. See [Run it locally](#run-it-locally) below.
 
-![Demo of the todo app](docs/demo.gif)
+![Demo of the todo app](public/assets/trial.gif)
 
 ## How It's Made:
 
