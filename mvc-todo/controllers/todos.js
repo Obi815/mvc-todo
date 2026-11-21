@@ -3,7 +3,7 @@ const Todo = require('../models/Todo')
 module.exports = {
     getTodos: async (req, res) => {
         try {
-            const todoItems = await Todo.find()
+            const todoItems = await Todo.find({user: req.user.id})
             res.render('todos.ejs', { todos:todoItems })
         } catch (err) {
             console.log(err)
@@ -11,7 +11,7 @@ module.exports = {
     },
     createTodo: async(req, res) => {
         try {
-            const makeTodo = await Todo.create({ todo: req.body.userTodo })
+            await Todo.create({ todo: req.body.userTodo, user: req.user.id })
             res.redirect('/todos')
         } catch (err) {
             console.log(err)
