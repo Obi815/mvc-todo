@@ -16,22 +16,28 @@ app.set('view engine','ejs')
 
 app.use(express.urlencoded({ extended: true }))
 
-app.get('/', (req, res) => {
-    res.render("index.ejs")
-})
-
 // Sessions
 app.use(
-    session({
-      secret: process.env.SESSION_SECRET,
-      resave: false,
-      saveUninitialized: false,
-    })
-  )
+  session({
+    secret: process.env.SESSION_SECRET,
+    resave: false,
+    saveUninitialized: false,
+  })
+)
+
   
 // Passport middleware
 app.use(passport.initialize())
 app.use(passport.session())
+
+app.get('/', (req, res) => {
+    if (req.isAuthenticated()) {
+        return res.redirect('/todos')
+    }
+    res.render('index.ejs')
+})
+
+
 app.use('/', mainRoutes)
 app.use('/todos', routes)
 
