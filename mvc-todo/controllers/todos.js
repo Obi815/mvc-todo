@@ -11,7 +11,9 @@ module.exports = {
     },
     createTodo: async(req, res) => {
         try {
-            await Todo.create({ todo: req.body.userTodo, user: req.user.id })
+            await Todo.create({ 
+                todo: req.body.userTodo, 
+                user: req.user.id })
             res.redirect('/todos')
         } catch (err) {
             console.log(err)
@@ -19,7 +21,10 @@ module.exports = {
     },
     deleteTodo: async(req, res) => {
         try {
-            const deleteTodo = await Todo.findByIdAndDelete(req.body.todoIdFromJSFile)
+            await Todo.findOneAndDelete({
+                _id: req.body.todoIdFromJSFile,
+                user: req.user.id //deleting specific user todos
+            })
             res.json('Deleted It')
         } catch (err) {
             console.log(err)
@@ -27,8 +32,11 @@ module.exports = {
     },
     markComplete: async(req, res) => {
         try {
-            const completeTodo = await Todo.findByIdAndUpdate(req.body.todoIdFromJSFile, 
-                { completed: true })
+            await Todo.findOneAndUpdate({
+                _id: req.body.todoIdFromJSFile, 
+                user: req.user.id
+            },
+            { completed: true },)
             res.json('Marked Complete')
         } catch (err) {
             console.log(err)
@@ -36,9 +44,12 @@ module.exports = {
     },
     markIncomplete: async(req, res) => {
         try {
-            const incompleteTodo = await Todo.findByIdAndUpdate(req.body.todoIdFromJSFile, 
-                { completed: false })
-                res.json('Marked Incomplete')
+            await Todo.findOneAndUpdate({
+                _id: req.body.todoIdFromJSFile, 
+                user: req.user.id
+            },
+            { completed: false },)
+            res.json('Marked Incomplete')
         } catch (err) {
             console.log(err)
         }
